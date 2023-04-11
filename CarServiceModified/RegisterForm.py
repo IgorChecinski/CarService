@@ -44,7 +44,7 @@ class RegisterForm:
                 raise Exception("password to short")
 
             if not any(char.isdigit() for char in password):
-                raise Exception("Hasło musi posiadać przynajmniej jedną cyfre")
+                raise Exception("password must contain at least one digit")
 
             if not any(char.isupper() for char in password):
                 raise Exception("password needs at least one big letter")
