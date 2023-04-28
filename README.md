@@ -2,7 +2,7 @@
 
 <<<<<<< HEAD
 
-test
+
 =======
 The topic of this project is to create web application
 for car service with following features:
