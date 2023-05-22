@@ -1,6 +1,6 @@
 from typing import List
 from sqlalchemy.orm import Session
-from My_module.models.user import User
+from my_package.My_module.backend.models.user import User
 
 
 class UserRepository:
@@ -13,8 +13,15 @@ class UserRepository:
         self.db.refresh(user)
         return user
 
-    def get_all(self) -> List[User]:
-        return self.db.query(User).all()
+    def get_all(self) -> List[dict]:
+        users = self.db.query(User).all()
+        user_dicts = []
+        for user in users:
+            user_dict = {
+                'first_name': user.first_name
+            }
+            user_dicts.append(user_dict)
+        return user_dicts
 
     def get_by_id(self, id: int) -> User:
         return self.db.query(User).filter(User.idUser == id).first()

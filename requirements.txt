@@ -2,3 +2,6 @@ SQLAlchemy==2.0.9
 jupyterlab==3.6.3
 psycopg2-binary==2.9.6
 pydantic==1.10.7
+uvicorn==0.22.0
+Jinja2==3.0.3
+fastapi==0.73.0

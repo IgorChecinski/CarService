@@ -15,7 +15,7 @@ class User:
 
 print(User.__table__.columns.keys())
 
-DB_URL = "sqlite:////Users/igor/Documents/School/PPY/CarService1.2/My_package/database/my.db"
+DB_URL = "sqlite://///Users/igor/Documents/School/PPY/Praca/CarService/my_package/database/my.db"
 
 engine = create_engine(DB_URL, connect_args={"check_same_thread": False})
 connection = engine.connect()
