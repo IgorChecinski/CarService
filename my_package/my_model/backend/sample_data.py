@@ -1,5 +1,5 @@
-from background.database import SessionLocal
-from background.models import User, Comment
+from backend.database import SessionLocal
+from backend.models import User, Comment
 
 # Create a database session
 db = SessionLocal()
