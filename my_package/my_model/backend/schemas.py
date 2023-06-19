@@ -5,20 +5,18 @@ class CommentBase(BaseModel):
     content: str
 
 
-class CommentCreate(CommentBase):
-    pass
-
-
-class Comment(CommentBase):
-    id: int
+class CommentCreate(BaseModel):
+    content: str
     commentator_id: int
 
-    class Config:
-        orm_mode = True
+
+class Comment(BaseModel):
+    content: str
 
 
 class UserBase(BaseModel):
-    name: str
+    username: str
+    password: str
 
 
 class UserCreate(UserBase):
@@ -31,3 +29,12 @@ class User(UserBase):
 
     class Config:
         orm_mode = True
+
+
+class Token(BaseModel):
+    access_token: str
+    token_type: str
+
+    
+
+    

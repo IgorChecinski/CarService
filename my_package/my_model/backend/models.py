@@ -8,9 +8,11 @@ class User(Base):
     __tablename__ = "users"
 
     id = Column(Integer, primary_key=True, index=True)
-    name = Column(String)  
+    username = Column(String)  
+    password = Column(String)
 
     comments = relationship("Comment", back_populates="commentator")
+
 
 
 class Comment(Base):
@@ -21,3 +23,5 @@ class Comment(Base):
     commentator_id = Column(Integer, ForeignKey("users.id"))
 
     commentator = relationship("User", back_populates="comments")
+
+

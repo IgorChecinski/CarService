@@ -93,66 +93,45 @@
     </style>
 </head>
 <body>
+    
     <nav>
         <ul>
             <li><a href="/">Home</a></li>
             <li><a href="/services/">Services</a></li>
             <li><a href="/comments/">User Comments</a></li>
+            {% if user %}
+                <li><a href="/logout">Logout</a></li>
+                <li>Welcome, {{ user.username }}!</li>
+            {% else %}
+                <li><a href="/login">Login</a></li>
+            {% endif %}
         </ul>
     </nav>
+
     <h1>User Comments</h1>
+    {% if error_message %}
+    <p class="error-message">{{ error_message }}</p>
+    {% endif %}
     
     <div class="form-container">
-        <input type="text" id="nameInput" placeholder="Your Name">
-        <input type="text" id="commentInput" placeholder="Leave a Comment">
-        <button onclick="addComment()">Add Comment</button>
+        <form action="/add_comment" method="post">
+            <input type="text" name="comment" placeholder="Leave a Comment">
+            <button type="submit">Add Comment</button>
+        </form>
     </div>
     
     <div id="commentsContainer">
         {% for user in users %}
-            <h2>{{ user.name }}</h2>
+        {% if user.comments %}
+            <h2>{{ user.username }}</h2>
             <ul>
                 {% for comment in user.comments %}
                     <li>{{ comment.content }}</li>
                 {% endfor %}
             </ul>
+        {% endif %}
         {% endfor %}
     </div>
-    
-    <script>
-        function addComment() {
-            var name = document.getElementById('nameInput').value;
-            var comment = document.getElementById('commentInput').value;
-            
-            if (name && comment) {
-                var commentsContainer = document.getElementById('commentsContainer');
-                
-                var userDiv = document.createElement('div');
-                userDiv.innerHTML = '<h2>' + name + '</h2><ul><li>' + comment + '</li></ul>';
-                
-                commentsContainer.appendChild(userDiv);
-                
-                // Clear input fields
-                document.getElementById('nameInput').value = '';
-                document.getElementById('commentInput').value = '';
-                
-                // Send POST request to add comment to the database
-                var data = {
-                    user_id: 1, // Replace with the actual user ID
-                    content: comment
-                };
-                fetch('/', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify(data)
-                })
-                .then(response => response.json())
-                .then(result => console.log(result))
-                .catch(error => console.error('Error:', error));
-            }
-        }
-    </script>
+   
 </body>
 </html>

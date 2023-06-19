@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Home - Car Service</title>
+    <title>Register - Car Service</title>
     <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body {
@@ -31,7 +31,7 @@
             padding: 15px 20px;
         }
 
-        nav ul {
+        nav ul.menu {
             list-style: none;
             padding: 0;
             margin: 0;
@@ -39,48 +39,64 @@
             justify-content: center;
         }
 
-        nav ul li {
+        nav ul.menu li {
             margin-right: 15px;
         }
 
-        nav ul li a {
+        nav ul.menu li a {
             color: #fff;
             text-decoration: none;
         }
 
-        nav ul li a:hover {
+        nav ul.menu li a:hover {
             color: #ddd;
         }
-        
-        #welcome {
-            padding: 10px 20px;
-            text-align: center;
+
+        form {
+            width: 300px;
+            margin: auto;
         }
-        
+
+        label, input {
+            display: block;
+            margin: 0 0 15px 0;
+        }
+
+        input[type="submit"] {
+            background-color: #333;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #555;
+        }
     </style>
 </head>
 <body>
+    
     <nav>
-        <ul>
+        <ul class="menu">
             <li><a href="/">Home</a></li>
             <li><a href="/services/">Services</a></li>
             <li><a href="/comments/">User Comments</a></li>
-            {% if user %}
-                <li><a href="/logout">Logout</a></li>
-                <li>Welcome, {{ user.username }}!</li>
-            {% else %}
-                <li><a href="/login">Login</a></li>
-            {% endif %}
+            <li><a href="/login">Login</a></li>
         </ul>
     </nav>
-    
-    
-
-    <div id="welcome">
-        <h1>Welcome to our official website!</h1>
-        <p>Telephone: +123456789</p>
-        <p>Location: Street Address, City, Postal Code</p>
-        <img src="{{ url_for('static', path='map.png') }}" alt="Map">
-    </div>
+    <h1>Register for Car Service</h1>
+    <form action="/register" method="post">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username">
+        <label for="password">Password:</label>
+        <input type="text" id="password" name="password">
+        <label for="confirm_password">Confirm Password:</label>
+        <input type="text" id="confirm_password" name="confirm_password">
+        <input type="submit" value="Register">
+    </form>
+    {% if error_message %}
+<p class="error-message">{{ error_message }}</p>
+{% endif %}
 </body>
 </html>
