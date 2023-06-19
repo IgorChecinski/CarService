@@ -77,7 +77,6 @@ def get_optional_current_user(request: Request, db: Session = Depends(get_db)):
             return user
     return None
 
-#not exacly sure why we need to implement those 2 functions, after finishing everything i'll try to delete on and implement the other function in the place of some endpoints
 
 # Dependency to get the current user from the session
 def get_current_user(request: Request, db: Session = Depends(get_db)):
@@ -91,7 +90,7 @@ def get_current_user(request: Request, db: Session = Depends(get_db)):
 
     return user
 
-# Save sum to user endpoint, this endpointis only creatted for identyfing that the current user picked services and the sum of those services were added to his account(this is onlt=y a message it does not do that in db)
+# Save sum to user endpoint
 @app.post("/save_sum")
 async def save_sum(
     request: Request,
@@ -154,9 +153,9 @@ def read_services(
     current_user: models.User = Depends(get_optional_current_user)
 ):
     services = [
-        {"name": "Service 1", "description": "This is service 1", "price": 100},
-        {"name": "Service 2", "description": "This is service 2", "price": 200},
-        {"name": "Service 3", "description": "This is service 3", "price": 300},
+        {"name": "Oil Change", "description": "Regular oil change to maintain engine performance and extend the life of your vehicle.", "price": 100},
+        {"name": "Air Conditioning Service", "description": "Inspection and maintenance of the A/C system to keep it running efficiently and provide comfortable cabin temperature.", "price": 200},
+        {"name": "Wheel Alignment", "description": "Adjusting the angles of the wheels to improve vehicle handling, tire lifespan, and fuel efficiency.", "price": 300},
     ]
     return templates.TemplateResponse("service.html", {"request": request, "services": services, "user": current_user})
 
